@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!--In the label field of fragment you can give the name that you want to show in the toolbar-->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.android.atr07.drawerwithbottomnavigation.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/accountsFragment"
+        android:name="com.android.atr07.drawerwithbottomnavigation.fragments.AccountsFragment"
+        android:label="Accounts"
+        tools:layout="@layout/fragment_accounts" />
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.android.atr07.drawerwithbottomnavigation.fragments.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.android.atr07.drawerwithbottomnavigation.fragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.android.atr07.drawerwithbottomnavigation.fragments.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+
+</navigation>
