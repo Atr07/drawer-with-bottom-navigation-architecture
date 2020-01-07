@@ -12,4 +12,4 @@ SF : https://stackoverflow.com/questions/55990820/how-to-use-navigation-drawer-a
 
 <img src="extras/profile.jpg" height="20%" width="20%">
 
-[APK for testing](extras/drawer.with.bottom.navigation.architecture.apk)
+[APK for testing](extras/drawer.with.bottom.navigation.architecture.v1.1.apk)

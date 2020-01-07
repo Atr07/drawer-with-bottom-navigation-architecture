@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -60,26 +61,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideBothNavigation() { //Hide both drawer and bottom navigation bar
-        main_bottom_navigation_view.visibility = View.GONE
-        main_navigation_view.visibility = View.GONE
+        main_bottom_navigation_view?.visibility = View.GONE
+        main_navigation_view?.visibility = View.GONE
+        main_drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED) //To lock navigation drawer so that it don't respond to swipe gesture
     }
 
     private fun hideBottomNavigation() { //Hide bottom navigation
-        main_bottom_navigation_view.visibility = View.GONE
-        main_navigation_view.visibility = View.VISIBLE
+        main_bottom_navigation_view?.visibility = View.GONE
+        main_navigation_view?.visibility = View.VISIBLE
+        main_drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED) //To unlock navigation drawer
 
-        main_navigation_view.setupWithNavController(navController) //Setup Drawer navigation with navController
+        main_navigation_view?.setupWithNavController(navController) //Setup Drawer navigation with navController
     }
 
     private fun showBothNavigation() {
-        main_bottom_navigation_view.visibility = View.VISIBLE
-        main_navigation_view.visibility = View.VISIBLE
+        main_bottom_navigation_view?.visibility = View.VISIBLE
+        main_navigation_view?.visibility = View.VISIBLE
+        main_drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         setupNavControl() //To configure navController with drawer and bottom navigation
     }
 
     private fun setupNavControl() {
-        main_navigation_view.setupWithNavController(navController) //Setup Drawer navigation with navController
-        main_bottom_navigation_view.setupWithNavController(navController) //Setup Bottom navigation with navController
+        main_navigation_view?.setupWithNavController(navController) //Setup Drawer navigation with navController
+        main_bottom_navigation_view?.setupWithNavController(navController) //Setup Bottom navigation with navController
     }
 
     fun exitApp() { //To exit the application call this function from fragment
