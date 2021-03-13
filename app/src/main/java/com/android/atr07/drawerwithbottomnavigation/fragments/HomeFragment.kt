@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.android.atr07.drawerwithbottomnavigation.MainActivity
 
 import com.android.atr07.drawerwithbottomnavigation.R
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.android.atr07.drawerwithbottomnavigation.databinding.FragmentHomeBinding
 
 /**
  * HomeFragment
@@ -22,13 +22,15 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment(), View.OnClickListener { //OnClickListener
 
     private lateinit var navController: NavController
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,12 +39,12 @@ class HomeFragment : Fragment(), View.OnClickListener { //OnClickListener
         navController = findNavController() //Initialising navController
 
         //Initialising button click event listener
-        home_next_frag_btn.setOnClickListener(this)
-        home_close_app_btn.setOnClickListener(this)
+        binding.homeNextFragBtn.setOnClickListener(this)
+        binding.homeCloseAppBtn.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) { //When click occurs this function is triggered
-        when(v!!.id) { //Check for the id of the view i which click event happened
+        when(v?.id) { //Check for the id of the view i which click event happened
             R.id.home_next_frag_btn -> goToNextFragment()
             R.id.home_close_app_btn -> closeApp()
         }
