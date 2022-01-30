@@ -3,6 +3,8 @@ package com.android.atr07.drawerwithbottomnavigation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -12,6 +14,10 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.android.atr07.drawerwithbottomnavigation.databinding.ActivityMainBinding
+import com.android.atr07.drawerwithbottomnavigation.fragments.HomeFragment
+import android.content.Intent
+import android.view.MenuItem
+
 
 /**
  * SF: https://stackoverflow.com/questions/55990820/how-to-use-navigation-drawer-and-bottom-navigation-simultaneously-navigation-a/
@@ -34,17 +40,30 @@ class MainActivity : AppCompatActivity() {
 
         navController = findNavController(R.id.main_nav_host) //Initialising navController
 
-        appBarConfiguration = AppBarConfiguration.Builder(R.id.homeFragment, R.id.accountsFragment,
+        appBarConfiguration = AppBarConfiguration.Builder( R.id.accountsFragment,
             R.id.dashboardFragment, R.id.settingsFragment) //Pass the ids of fragments from nav_graph which you d'ont want to show back button in toolbar
             .setOpenableLayout(binding.mainDrawerLayout) //Pass the drawer layout id from activity xml
             .build()
-
         setSupportActionBar(binding.mainToolbar) //Set toolbar
 
         setupActionBarWithNavController(navController, appBarConfiguration) //Setup toolbar with back button and drawer icon according to appBarConfiguration
 
+
         visibilityNavElements(navController) //If you want to hide drawer or bottom navigation configure that in this function
     }
+ /*   override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.getItemId()) {
+            R.id.homeFragment -> {
+                // todo: goto back activity from here
+             *//*   val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)*//*
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }*/
 
     private fun visibilityNavElements(navController: NavController) {
 
@@ -92,14 +111,25 @@ class MainActivity : AppCompatActivity() {
         this.finishAffinity()
     }
 
-    override fun onSupportNavigateUp(): Boolean { //Setup appBarConfiguration for back arrow
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = navController
+        return when(navController.currentDestination?.id) {
+            R.id.homeFragment -> {
+                finish()
+                true
+            }
+            else -> navController.navigateUp()
+        }
+        //Setup appBarConfiguration for back arrow
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 
     override fun onBackPressed() {
+
         when { //If drawer layout is open close that on back pressed
             binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START) -> {
                 binding.mainDrawerLayout.closeDrawer(GravityCompat.START)
+
             }
             else -> {
                 super.onBackPressed() //If drawer is already in closed condition then go back
